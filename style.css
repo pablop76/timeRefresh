@@ -1,0 +1,35 @@
+body {
+    background-color: #000;
+    color: #fff;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+table,
+th,
+td {
+    padding: 5px;
+    border: 1px solid #a5a5a5;
+}
+
+.data {
+    display: block;
+    color: #ffffff;
+    background-color: #4b801e;
+    border: 0;
+    margin: 0 auto;
+    height: 20px;
+}
+
+.noBtn {
+    display: block;
+    margin: 0 auto;
+    background-color: transparent;
+    border: 0;
+    color: #fff;
+    height: 20px;
+}
