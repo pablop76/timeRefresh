@@ -22,36 +22,52 @@ showTime();
 function start() {
 
     let now = new Date();
+
     //wstawienie do tabeli godziny rozpoczęcia załadunku 
-    tabStart.push(now);
+    tabStart[(this.dataset.id) - 1] = now;
+    console.log(tabStart)
+
     //wyswietlenie godziny rozpoczecia załadunku
     this.textContent = addZero(now.getHours()) +
         ':' + addZero(now.getMinutes());
     this.classList = 'noBtn';
+
     // zablokowanie mozliwosci klkniecia po ustawieniu startu
     this.setAttribute('disabled', true);
+
     //odpalenie czasu, który upłynął
     difference();
 }
+
 //petla po przyciskach startujących i nasłuchiwanie kliknięcia, uruchomienie funkcji start()
 let btnStart = document.getElementsByClassName('data');
 for (let i = 0; i < btnStart.length; i++) {
     btnStart[i].addEventListener('click', start);
 };
+
 //zwraca aktualna data
 function timeCurrently() {
     let currently = new Date();
     return currently;
 }
+
 //oblicz różnice start/aktualny czas
 function difference() {
     let differenceTr = document.getElementsByClassName("difference");
     let differenceTime = [];
-    //aktualne czas
+
+    //aktualny czas
     for (let i = 0; i < tabStart.length; i++) {
-        differenceTime.push(timeCurrently().getTime() - tabStart[i].getTime());
+        if (tabStart[i] == undefined)
+            differenceTime[i] = '';
+        else
+            differenceTime[i] = timeCurrently().getTime() - tabStart[i].getTime();
         //przekształcenie liczby milisekund w sekundy i przetwożenie na system dziesiętny i wypisanie w tabeli
-        differenceTr[i].innerHTML = parseInt(differenceTime[i] / 1000, 10) + ' sek';
+        if (differenceTime[i] == 0) {
+            differenceTr[i].innerHTML = '';
+        } else {
+            differenceTr[i].innerHTML = parseInt(differenceTime[i] / 1000, 10) + ' sek';
+        }
 
     }
     setTimeout(function () {
